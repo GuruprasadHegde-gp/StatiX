@@ -24,7 +24,7 @@ contract dev_staking {
         // If the user wants to cancel the contract then this function is called
         dev_to_reward[msg.sender] = 0; // All the reward is set to 0
         uint help_cancel_ind = help_cancel_index(msg.sender); // calls the help_cancel_index function to get the index of cancelers address
-        delete_helper(help_cancel_ind); //delete_helper function is called
+        delete_help(help_cancel_ind); //delete_helper function is called
         withdraw_cancelled_price(); //Returns the amount staked by the user
     }
 
@@ -40,8 +40,8 @@ contract dev_staking {
         }
     }
 
-    function delete_helper(uint256 index) internal {
-        //This function ndeletes the cancelled helpers address and removes it totally from the array
+    function delete_help(uint256 index) internal {
+        //This function ndeletes the cancelled help seekers address address and removes it totally from the array
         if (index >= dev_address.length) return;
 
         for (uint i = index; i < dev_address.length - 1; i++) {
@@ -59,6 +59,7 @@ contract dev_staking {
     }
 
     modifier canceler_only() {
+        // Modifier
         if (msg.sender != help_deployer) {
             revert not_a_canceler();
         }
